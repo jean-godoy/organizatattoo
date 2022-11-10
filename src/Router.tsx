@@ -42,7 +42,7 @@ export const Router = () => {
     return (
             <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route path="/main" element={<Private><Main /></Private>} />
+                <Route path="/" element={<Private><Main /></Private>} />
                 <Route path="/clientes" element={<Private><Costumer /></Private>} />
                 <Route path="/cliente-cadastro" element={<Private><CostumerStore /></Private>} />
                 <Route path='*' element={<h1>Not Found</h1>} />

@@ -1,0 +1,9 @@
+main {
+    background: #f3f4f6;
+    grid-area: main;
+    overflow-y: auto;
+}
+
+@media only screen and (max-width: 855px) {
+
+}

@@ -1,0 +1,122 @@
+:root {
+    --primary-color: #fd951f;
+    --bg-color: #130f0d;
+    --text-color: #f0f0f5;
+    --light-color: rgba(255, 255, 255, 0.04);
+    --bb-color: #666;
+    --border-color: rgba(0,0,0, 0.3)
+}
+
+.m__budget__box {
+     display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 960px;
+    height: 80vh;
+    background-color: #efefef;
+    border-radius: 8px;
+    overflow-y: scroll;
+}
+
+.m__budget__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    padding: 10px 15px;
+    color: #555;
+    font-size: 2.2rem;
+    border-bottom: 1px solid #888;
+}
+
+.m__budget__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 32px auto;
+    padding: 10px 15px;
+}
+
+.box-input-content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 30px;
+    border-radius: 6px;
+}
+
+.box-input-content-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.box-input-content-header > span {
+    margin-left: 10px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    position: relative;
+    /* background-color: red; */
+}
+
+.mc-label {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    height: 30px;
+    color: #666;
+    transition: .4s;
+    font-size: 1.6rem;
+}
+
+.mc-input {
+    height: 40px;
+    appearance: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    background-color: transparent;
+    font-size: 1.6rem;
+    color: #666;
+}
+
+
+.mc-input:focus + label,
+.mc-input:valid + label {
+    transform: translateY(-24px);
+    font-size: 1rem;
+   
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.label__input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+    height: 50px;
+    padding: 10px 15px;
+    background-color: #333;
+    color: #FFF;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.input__group__orizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,0 +1,259 @@
+:root {
+    --primary-color: #fd951f;
+    --bg-color: #130f0d;
+    --text-color: #f0f0f5;
+    --light-color: rgba(255, 255, 255, 0.04);
+    --bb-color: #666;
+    --border-color: rgba(0,0,0, 0.3)
+}
+
+.calendar-modal {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.box-modal-calendar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 960px;
+    height: 80vh;
+    background-color: #efefef;
+    border-radius: 8px;
+    overflow-y: scroll;
+}
+
+.modal-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    padding: 10px 15px;
+    color: #555;
+    font-size: 2.2rem;
+    border-bottom: 1px solid #888;
+}
+
+.header>span {}
+
+.moda-calendar-icon:hover {
+    cursor: pointer;
+}
+
+.modal-calendar-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 32px auto;
+    padding: 10px 15px;
+    /* border: 1px solid var(--border-color); */
+
+}
+
+.box-input-content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 30px;
+    border-radius: 6px;
+}
+
+.box-input-content-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.box-input-content-header > span {
+    margin-left: 10px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    position: relative;
+    /* background-color: red; */
+}
+
+.input__store__group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.mc-label {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    height: 30px;
+    color: #666;
+    transition: .4s;
+    font-size: 1.6rem;
+}
+
+.mc-input {
+    height: 40px;
+    appearance: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    background-color: transparent;
+    font-size: 1.6rem;
+    color: #666;
+}
+
+
+.mc-input:focus + label,
+.mc-input:valid  label {
+    transform: translateY(-24px);
+    font-size: 1rem;
+   
+}
+
+.box-select-radio > fieldset{
+    border: none;
+}
+
+.box-input-radio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.box-group-radio {
+    display: flex;
+    align-items: center;
+}
+
+.box-group-radio > input {
+    margin-right: 10px;
+    background-color: transparent;
+}
+
+.box-group-radio > label {
+  color: #666;
+}
+
+.box-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+
+/* ############### HORARIOS */
+
+.box-groupt-input-date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+}
+
+.box-input-date {
+    display: flex;
+    flex-direction: column;
+    /* height: 100px; */
+    color: #111;
+}
+
+.btn {
+    padding: 15px 20px;
+    margin-right: 20px;
+    border: none;
+    background-color: #333;
+    color: #efefef;
+    font-size: 1.8rem;
+    font-weight: 700;
+    /* width: 180px; */
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #111;
+}
+
+/* ##################### DROP DOWN SELECT  */
+.box-dropdown-select {
+    position: relative;
+    width: 200px;
+    background-color: #333;
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+}
+
+.dropdown-select-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #fff;
+    /* border-bottom: 1px solid var(--border-color); */
+}
+
+.icon-clock {
+    margin-right: 10px;
+}
+
+.box-dropdown-select:hover .box-dropdown-list-option {
+    opacity: 1;
+    visibility: visible;
+}
+
+.box-dropdown-list-option {
+    border-radius: 4px;
+    background-color: #fefefe;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s linear, visibility 0.2s linear;
+    max-height: 300px;
+    overflow-y: auto;
+    /* margin-bottom: 30px; */
+}
+
+.dropdown-list-option {
+    padding: 1rem;
+    font-size: 1.4rem;
+    background-color: transparent;
+}
+
+.dropdown-list-option:hover {
+    background-color: #888;
+    cursor: pointer;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+
+
+
+
+
+

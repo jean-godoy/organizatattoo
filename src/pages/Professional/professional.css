@@ -1,0 +1,22 @@
+.box__form__store {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px 15px;
+}
+
+.input__group__border {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    margin-bottom: 20px;
+   
+}
+
+.input__group__border > h3 {
+    font-size: 1.6rem;
+    color: #777;
+    margin-bottom: 50px;
+}

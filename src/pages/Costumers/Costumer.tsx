@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { ICostumer } from '../../@types';
-import { Modal } from '../../components /ModalCostumer/Modal';
-import { ModalCostumerSearch } from '../../components /ModalCostumer/ModalCostumerSearch';
-import { Dashboard } from '../../components /Themes/Dashboard/Dashboard';
+import Loading from '../../components/Loading/Loading';
+import { ModalUserDetails } from '../../components/ModalCostumer/ModalUserDetails';
+import { ModalCostumerSearch } from '../../components/ModalCostumer/ModalCostumerSearch';
+import { Content } from '../../components/Themes/Content/Content';
+import { Dashboard } from '../../components/Themes/Dashboard/Dashboard';
+import { Main } from '../../components/Themes/Main/Main';
+import { getCostumers } from '../../services/costumer/costumerService';
 import './costumer.css';
 
 export type listType = {
@@ -19,44 +23,31 @@ export const Costumer = () => {
 
     const [modalToggle, setModalToggle] = useState<boolean>(false);
     const [modalSearch, setModalSerach] = useState<boolean>(false);
-    const [costumer, setCostumer] = useState<ICostumer>({} as ICostumer);
-    const costumers = [
-        {
-            address: "Rua Jackson",
-            birth_date: "2022-11-10",
-            cep: "89.130.000",
-            city: "Indaial",
-            cpf: "111.111.111-11",
-            district: "tapajo",
-            email: "seidecapital@gmail.com",
-            name: "Jean Carlos Seide",
-            phone: "47989079276",
-            uf: "Sc"
-        },
-        {
-            address: "Rua Jackson",
-            birth_date: "2022-11-10",
-            cep: "89.130.000",
-            city: "Indaial",
-            cpf: "111.111.111-11",
-            district: "tapajo",
-            email: "seidecapital@gmail.com",
-            name: "Jhon Doe",
-            phone: "47989079276",
-            uf: "Sc"
-        },
-    ];
+    const [costumer, setCostumer] = useState<any>();
+    const [loading, setLoading] = useState<boolean>(false);
+    const [dataModal, setDataModal] = useState<any>();
+
+    useEffect(() => {
+        setLoading(true);
+        (async () => {
+            const response =  await getCostumers();
+            if(response.status) {
+                setCostumer(response.data);
+                setLoading(false);
+            }
+        })()
+    },[]);
 
     const closeModal = (): void => {
         setModalToggle(false);
     }
 
-    const openModal = (item: ICostumer) => {
+    const handleModal = (item: ICostumer) => {
         setModalToggle(true);
-        setCostumer(item);
+        setDataModal(item);
     }
 
-    const openModalSearch = ():void => {
+    const openModalSearch = (): void => {
         setModalSerach(true);
     }
 
@@ -64,24 +55,35 @@ export const Costumer = () => {
 
     return (
         <Dashboard>
-            {modalToggle ? <Modal closeModal={closeModal} costumer={costumer} /> : <div></div>}
-            {modalSearch ? <ModalCostumerSearch closeModalSearch={() => setModalSerach(false)} /> : <div></div> }
-            <div className="box-costumer">
-                <div className="box-list">
-                    <div className="header">
-                        <header>Clientes</header>
-                        <FaSearch className="icon-search" onClick={openModalSearch} />
+            {loading ? <Loading /> : <div></div> }
+            {modalToggle ? <ModalUserDetails closeModal={closeModal} costumer={dataModal} /> : <div></div>}
+            {modalSearch ? <ModalCostumerSearch closeModalSearch={() => setModalSerach(false)} /> : <div></div>}
+            <Main>
+                <Content>
+                    <div className="g__box__list">
+                        <header className="g__list__header">
+                            <span>Clientes</span>
+                            <FaSearch className="icon-search" />
+                        </header>
+
+                        <ul className="g__list__ul">
+                            {costumer ?
+                                costumer?.map((item: any, index: number) => (
+                                    <li className="g__list__li" key={index} onClick={() => handleModal(item)} >
+                                        <span className="g__list__li__name">Nome:</span>
+                                        <span className="g__list__li__value">{item.name}</span>
+                                    </li>
+                                ))
+                                :
+                                <li className="g__list__li" >
+                                    <span className="g__list__li__name">Nenhum cliente cadastrado.</span>
+                                </li>
+
+                            }
+                        </ul>
                     </div>
-                    <ul className="list-ul">
-                        {costumers.map((item: any, index: number) => (
-                            <li onClick={() => openModal(item)} className="list-li" key={index}>
-                                <label>{item.name}</label>
-                                <label className="list-modal-email">{item.email}</label>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
+                </Content>
+            </Main>
         </Dashboard>
     );
 }

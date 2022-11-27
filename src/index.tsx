@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './styles/form.css';
+import './styles/list.css';
+import './styles/modalDetails.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import './styles/global.css';
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/Auth/AuthProvider';
+import { ToastifyProvider } from './contexts/Toastify/ToastifyProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,7 +19,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <ToastifyProvider>
+          <App />
+        </ToastifyProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

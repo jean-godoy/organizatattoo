@@ -1,0 +1,245 @@
+.global__form__column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 32px auto;
+    padding: 10px 15px;
+}
+
+.g__input__content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 30px;
+    border-radius: 6px;
+}
+
+.g__input__content__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #555;
+    font-weight: 700;
+}
+
+.g__input__content__header > span {
+    margin-left: 10px;
+    font-size: 1.4rem;
+}
+
+
+.g__input__group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.g__input__label {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    height: 30px;
+    color: #666;
+    transition: .4s;
+    font-size: 1.6rem;
+}
+
+.global-input {
+    height: 40px;
+    appearance: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    background-color: transparent;
+    font-size: 1.6rem;
+    color: #666;
+}
+
+
+.global-input:focus + label,
+.global-input:valid + label {
+    transform: translateY(-24px);
+    font-size: 1rem;
+   
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.label__input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 200px;
+    height: 50px;
+    padding: 10px 15px;
+    background-color: #333;
+    color: #FFF;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.input__group__orizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input__group__border {
+    width: 100%;
+    padding: 10px 15px;
+    padding-top: 30px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    margin-bottom: 20px;
+   
+}
+
+.input__group__border > h3 {
+    font-size: 1.6rem;
+    color: #777;
+    margin-bottom: 50px;
+}
+
+/* ####################### INPUT SEARCH ###################### */
+.g__input__content__seacrh {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 30px;
+    border-radius: 6px;
+}
+
+.g__result__search {
+  
+}
+
+.g_input__ul__search {
+    
+}
+
+.g__input__li__search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 35px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    background-color: rgba(0,0,0, 0.1);
+    list-style: none;
+    font-size: 1.6rem;
+}
+
+.item__search__result {
+    font-weight: 700;
+    color: #666;
+}
+
+.item__search__value{
+    color: #555;
+}
+
+
+
+/* ############################ FIELDSET ############################ */
+
+.g__box__radio {
+    /* height: 180px; */
+    margin-bottom: 20px;
+}
+
+.g__box__radio__column > fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 15px;
+}
+
+.g__box__radio > fieldset {
+    font-size: 1.8rem;
+    padding: 10px 15px;
+    border: 1px solid #888;
+    border-radius: 4px;
+}
+
+.g__box__radio__column > fieldset {
+    font-size: 1.8rem;
+    padding: 10px 15px;
+    border: 1px solid #888;
+    border-radius: 4px;
+}
+
+.g__box__radio > fieldset > legend {
+    font-size: 1.8rem;
+    padding: 10px 15px;
+    color: #666;
+    font-weight: 700;
+}
+
+.g__box__input__radio__column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 15px;
+}
+
+.g__radio__column__legend{
+    font-size: 2rem;
+    padding: 0 15px;
+    color: #555;
+}
+
+.fieldset__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding: 10xp 15px;
+    font-size: 1.4rem;
+}
+
+.fieldset__content > p {
+    margin-bottom: 5px;
+}
+
+.fieldset__content > p > span {
+    font-weight: 700;
+    margin-right: 10px;
+    color: #666;
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0 30px white inset;
+}
+
+.g__box__group__radio__column {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+    font-size: 1.8rem;
+}
+
+.g__box__group__radio__column > input {
+    margin-right: 10px;
+}
+
+.g__box__group__radio__column > label {
+    margin-right: 10px;
+    font-weight: 700;
+    color: #555;
+}
+
+.g__box__group__radio__column > p {
+    margin-right: 10px;
+    font-weight: 700;
+    color: #555;
+    font-size: 1.6rem;
+}

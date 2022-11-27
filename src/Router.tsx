@@ -1,14 +1,22 @@
 import { useContext, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom"
 import { TSidebarOpen } from './@types';
-import { Loading } from "./components /Loading/styles";
+import { Calendar } from "./pages/Calendar/Calendar";
+import { Loading } from "./components/Loading/styles";
 
 // Pages
-import { Main } from "./components /Main/Main"
+import { Main } from "./components/Main/Main"
 import { AuthContext } from "./contexts/Auth/AuthContext";
 import { Costumer } from "./pages/Costumers/Costumer";
 import { CostumerStore } from "./pages/Costumers/CostumerStore";
 import { Login } from "./pages/Login/Login";
+import { Budget } from "./pages/Budget/Budget";
+import { Professional } from "./pages/Professional/Professional";
+import { ProfessionalStore } from "./pages/Professional/ProfessionalStore";
+import { Material } from "./pages/Material/Material";
+import { UserStore } from "./pages/User/UserStore";
+import { User } from "./pages/User/User";
+import { Register } from "./pages/Register/Register";
 
 export const Router = () => {
 
@@ -16,7 +24,6 @@ export const Router = () => {
     const { loading, authenticated } = useContext(AuthContext);
 
     const Private = ({ children }: { children: JSX.Element }) => {
-        console.log('private', loading);
 
         if (loading) {
 
@@ -42,9 +49,25 @@ export const Router = () => {
     return (
             <Routes>
                 <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+
                 <Route path="/" element={<Private><Main /></Private>} />
                 <Route path="/clientes" element={<Private><Costumer /></Private>} />
                 <Route path="/cliente-cadastro" element={<Private><CostumerStore /></Private>} />
+
+                <Route path="/proficionais" element={<Private><Professional /></Private>} />
+                <Route path="/proficional-cadastro" element={<Private><ProfessionalStore /></Private>} />
+
+                <Route path="/estoque/material-de-procedimentos" element={<Private><Material /></Private>} />
+
+                <Route path="/orcamentos" element={<Private><Budget /></Private>} />
+
+                <Route path="/agenda/calendario" element={<Private><Calendar /></Private>} />
+
+                <Route path="/usuarios" element={<Private><User /></Private>} />
+                <Route path="/usuarios/adicionar" element={<Private><UserStore /></Private>} />
+
+
                 <Route path='*' element={<h1>Not Found</h1>} />
             </Routes>
     );

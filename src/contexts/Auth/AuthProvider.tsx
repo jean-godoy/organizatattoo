@@ -1,44 +1,86 @@
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { TokenType, UserLogged, UserType } from "../../@types";
+import { TokenType, TUserData, UserLogged, UserType } from "../../@types";
+import { loginInfo } from "../../services/auth/loginInfoService";
+import loginService from "../../services/auth/loginService";
 import { AuthContext } from "./AuthContext"
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
     const navigate = useNavigate();
+
     const [user, setUser] = useState<UserType | null>(null);
+    const [userData, setUserData] = useState<any>();
     const [loading, setLoading] = useState(true);
     const [token, setToken] = useState<TokenType>(null);
     const [userLogged, setUserLogged] = useState<UserLogged>({} as UserLogged);
+    const [email, setEmail] = useState<string | null>(null);
 
 
     useEffect(() => {
+
         const recoveredUser = localStorage.getItem('@user');
-        // const recoveredToken: string | null = localStorage.getItem('@token');
+        const recoveredToken: string | null = localStorage.getItem('@token');
 
         if (recoveredUser) {
             setUser(JSON.parse(recoveredUser));
-            // setToken(recoveredToken);
+            setToken(recoveredToken);
+
+            const { email } = JSON.parse(recoveredUser);
+            setEmail(email);
+
+            if (!(!!userData)) {
+                const getLoginInfo: any = async (email: string) => {
+
+                    const response: any = await loginInfo(email);
+
+                    if (response.status) {
+                        setUserData(
+                            {
+                                userUuid: response.data.user_uuid,
+                                studioUuid: response.data.studio_uuid,
+                                studioName: response.data.studio_name,
+                                name: response.data.name,
+                                email: response.data.email,
+                                rules: response.data.rules,
+                                isAdmin: response.data.is_admin,
+
+                            }
+                        )
+                    }
+                }
+                getLoginInfo(email);
+            }
+
+            setLoading(false);
         }
 
-        setLoading(false);
 
     }, []);
 
+
     const login = async (email: string, password: string) => {
 
-        if (email == 'seidecapital@gmail.com') {
-            const data = {
-                email: '',
-                password: ''
-            };
+        if (email && password) {
 
-            userLogged.email = email;
-            userLogged.password = password;
-            setUserLogged(data);
-            localStorage.setItem('@user', JSON.stringify(userLogged));
-            navigate('/main');
-            window.location. reload()
+
+            const response = await loginService(email, password);
+
+            if (response.status) {
+
+                userLogged.email = response.data.user.email;
+                userLogged.name = response.data.user.name;
+
+                localStorage.setItem('@user', JSON.stringify(userLogged));
+                localStorage.setItem('@token', response.data.token);
+
+                if (userData) {
+                    setLoading(false);
+                    return true;
+                }
+
+            }
+
         }
     }
 
@@ -53,7 +95,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         <AuthContext.Provider
             value={{
                 authenticated: !!user,
-                user, login, logout, loading, token
+                isData: !!userData,
+                user, login, logout, loading, token, userData
             }}
         >
             {children}

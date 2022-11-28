@@ -55,8 +55,8 @@ export const Router = () => {
                 <Route path="/clientes" element={<Private><Costumer /></Private>} />
                 <Route path="/cliente-cadastro" element={<Private><CostumerStore /></Private>} />
 
-                <Route path="/proficionais" element={<Private><Professional /></Private>} />
-                <Route path="/proficional-cadastro" element={<Private><ProfessionalStore /></Private>} />
+                <Route path="/profissional" element={<Private><Professional /></Private>} />
+                <Route path="/profissional/cadastro" element={<Private><ProfessionalStore /></Private>} />
 
                 <Route path="/estoque/material-de-procedimentos" element={<Private><Material /></Private>} />
 

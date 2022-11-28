@@ -63,7 +63,7 @@ export const Register = () => {
                                         value={1}
                                     // defaultChecked={(data.is_active === 1) ? true : false}
                                     />
-                                    <label>Básico R$19,90</label>
+                                    <label>Individual R$19,90</label>
                                     <p>(Para um usuário)</p>
                                 </div>
 

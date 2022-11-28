@@ -199,11 +199,11 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                     </div>
                     {/* ----------------------------------------------- */}
                     <div className="box-drop professional">
-                        <Link to="/proficionais" className="sidebar-link-drop">
+                        <Link to="/profissional" className="sidebar-link-drop">
                             <FaUsers className="sidebar-link-icon" />
-                            <label>Proficionais</label>
+                            <label>Profissionais</label>
                         </Link>
-                        <Link to="/proficional-cadastro" className="sidebar-link-drop">
+                        <Link to="/profissional/cadastro" className="sidebar-link-drop">
                             <FaUserPlus className="sidebar-link-icon" />
                             <span>Cadastro</span>
                         </Link>

@@ -193,7 +193,7 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                     <div className="menu-drop-header">
                         <h2 className="drop-h2">
                             <FaUserTie className="icon-drop-h2" />
-                            <label>Proficionais</label>
+                            <label>Profissionais</label>
                         </h2>
                         <FaAngleDown className="icon-drop-down" />
                     </div>

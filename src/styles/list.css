@@ -66,3 +66,24 @@
     font-weight: 600;
    
 }
+
+.g__ul__search {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.g__li__search {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 15px 10px;
+    list-style: none;
+    font-size: 1.6rem;
+    border-bottom: 1px solid #999;
+}
+
+.g__li__search:hover {
+    cursor: pointer;
+    background-color: #999;
+    color: #efefef;
+}

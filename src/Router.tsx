@@ -17,6 +17,7 @@ import { Material } from "./pages/Material/Material";
 import { UserStore } from "./pages/User/UserStore";
 import { User } from "./pages/User/User";
 import { Register } from "./pages/Register/Register";
+import { NewBudget } from "./pages/Budget/NewBudget";
 
 export const Router = () => {
 
@@ -61,6 +62,7 @@ export const Router = () => {
                 <Route path="/estoque/material-de-procedimentos" element={<Private><Material /></Private>} />
 
                 <Route path="/orcamentos" element={<Private><Budget /></Private>} />
+                <Route path="/orcamentos/novo-orcamento" element={<Private><NewBudget /></Private>} />
 
                 <Route path="/agenda/calendario" element={<Private><Calendar /></Private>} />
 

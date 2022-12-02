@@ -122,6 +122,10 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                             <FaRegPlusSquare className="sidebar-link-icon" />
                             <label>Orçamentos</label>
                         </Link>
+                        <Link to="/orcamentos/novo-orcamento" className="sidebar-link-drop">
+                            <FaRegPlusSquare className="sidebar-link-icon" />
+                            <label>Novo Orçamento</label>
+                        </Link>
                     </div>
                 </div>
 

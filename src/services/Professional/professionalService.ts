@@ -1,4 +1,4 @@
-import { all, create } from '../../../hooks/useAPI';
+import { all, create, getBy } from '../../hooks/useAPI';
 
 export const getAll = async () => {
     try {
@@ -9,10 +9,10 @@ export const getAll = async () => {
     }
 }
 
-export const getBy = async (data: []) => {
-    const response = await create('/api/professional', data);
-    return response;
-}
+// export const getBy = async (data: []) => {
+//     const response = await create('/api/professional', data);
+//     return response;
+// }
 
 export const register = async (data: {}) => {
 
@@ -28,4 +28,13 @@ export const register = async (data: {}) => {
 export const edit = async (data: []) => {
     const response = await create('/api/professional', data);
     return response;
+}
+
+export const getProfessionalFullData = async (id: string) => {
+    try {
+        const response: any = await getBy(`/api/professional-full-data/${id}`);
+        return response.data;
+    } catch (error) {
+        console.log("ERROR PROFESSIONAL FUUL DATA", error);
+    }
 }

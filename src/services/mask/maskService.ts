@@ -15,3 +15,9 @@ export const handleDate = (data: string | number) => {
 export const handleCep = (data: string | number) => {
     return maskCEP(data);
 }
+
+export const handleFormatDateToOutput = (date: string) => {
+    const dateArray = date.split("-");
+    return `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
+    
+}

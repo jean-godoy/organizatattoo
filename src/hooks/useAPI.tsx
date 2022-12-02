@@ -21,6 +21,26 @@ export const all = async (url: string) => {
 }
 
 /**
+ * Hook for get all data by ID in DB.
+ * @param url 
+ * @returns 
+ */
+export const getBy = async (url: string) => {
+    try {
+        const response = await API.get(url, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access': 'application/json'
+            }
+        });
+
+        return response;
+    } catch (error) {
+        console.log("ERROR", error);
+    }
+}
+
+/**
  * Hook for create in DB.
  * @param url 
  * @param data 

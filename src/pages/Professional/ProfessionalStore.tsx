@@ -7,7 +7,7 @@ import { Content } from '../../components/Themes/Content/Content';
 import { Dashboard } from '../../components/Themes/Dashboard/Dashboard';
 import { Main } from '../../components/Themes/Main/Main';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
-import { register } from '../../services/auth/Professional/professionalService';
+import { register } from '../../services/Professional/professionalService';
 import { handleCep, handleCpf, handleDate, handlePhone } from '../../services/mask/maskService';
 import { clearMask } from '../../utils/mask/mask';
 import './professional.css';

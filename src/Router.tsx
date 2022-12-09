@@ -18,6 +18,7 @@ import { UserStore } from "./pages/User/UserStore";
 import { User } from "./pages/User/User";
 import { Register } from "./pages/Register/Register";
 import { NewBudget } from "./pages/Budget/NewBudget";
+import { Service } from "./pages/Category/Category";
 
 export const Router = () => {
 
@@ -39,14 +40,6 @@ export const Router = () => {
         return children;
     }
 
-    const openSidebar = () => {
-        setSidebarOpen(true);
-    };
-
-    const closeSidebar = () => {
-        setSidebarOpen(false);
-    }
-
     return (
             <Routes>
                 <Route path="/login" element={<Login />} />
@@ -58,6 +51,8 @@ export const Router = () => {
 
                 <Route path="/profissional" element={<Private><Professional /></Private>} />
                 <Route path="/profissional/cadastro" element={<Private><ProfessionalStore /></Private>} />
+
+                <Route path="/categoria-servico" element={<Private><Service /></Private>} />
 
                 <Route path="/estoque/material-de-procedimentos" element={<Private><Material /></Private>} />
 

@@ -19,7 +19,8 @@ import {
     FaRegCalendarAlt,
     FaRegCalendarCheck,
     FaUserTie,
-    FaUser
+    FaUser,
+    FaListOl
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { PropsSideBar } from '../../@types';
@@ -61,6 +62,11 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
         menu.classList.toggle("visible");
     }
 
+    const handleMenuService = () => {
+        const menu: any = document.querySelector(".service");
+        menu.classList.toggle("visible");
+    }
+
     return (
         <div className={sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
             <div className="sidebar-title">
@@ -95,7 +101,7 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                         </h2>
                         <FaAngleDown className="icon-drop-down" />
                     </div>
-                    {/* ----------------------------------------------- */}
+                    {/* ---------------------- DROP DOWN ------------------------- */}
                     <div id="boxDrop" className="box-drop">
                         <Link to="/clientes" className="sidebar-link-drop">
                             <FaUsers className="sidebar-link-icon" />
@@ -116,7 +122,7 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                         </h2>
                         <FaAngleDown className="icon-drop-down" />
                     </div>
-                    {/* ----------------------------------------------- */}
+                    {/* ---------------------- DROP DOWN ------------------------- */}
                     <div className="box-drop budget">
                         <Link to="/orcamentos" className="sidebar-link-drop">
                             <FaRegPlusSquare className="sidebar-link-icon" />
@@ -137,7 +143,7 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                         </h2>
                         <FaAngleDown className="icon-drop-down" />
                     </div>
-                    {/* ----------------------------------------------- */}
+                    {/* ---------------------- DROP DOWN ------------------------- */}
                     <div className="box-drop attendance">
                         <Link to="/agenda/calendario" className="sidebar-link-drop">
                             <FaRegCalendarCheck className="sidebar-link-icon" />
@@ -154,7 +160,7 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                         </h2>
                         <FaAngleDown className="icon-drop-down" />
                     </div>
-                    {/* ----------------------------------------------- */}
+                    {/* ---------------------- DROP DOWN ------------------------- */}
                     <div className="box-drop attendance">
                         <Link to="/gerar-orcamento" className="sidebar-link-drop">
                             <FaRegPlayCircle className="sidebar-link-icon" />
@@ -176,7 +182,7 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                         </h2>
                         <FaAngleDown className="icon-drop-down" />
                     </div>
-                    {/* ----------------------------------------------- */}
+                    {/* ---------------------- DROP DOWN ------------------------- */}
                     <div className="box-drop financial">
                         <Link to="/usuarios" className="sidebar-link-drop">
                             <FaUserFriends className="sidebar-link-icon" />
@@ -201,7 +207,7 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                         </h2>
                         <FaAngleDown className="icon-drop-down" />
                     </div>
-                    {/* ----------------------------------------------- */}
+                    {/* ---------------------- DROP DOWN ------------------------- */}
                     <div className="box-drop professional">
                         <Link to="/profissional" className="sidebar-link-drop">
                             <FaUsers className="sidebar-link-icon" />
@@ -213,6 +219,29 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                         </Link>
                     </div>
                 </div>
+                
+                {/* --------------------- CATEGORIES -------------------------- */}
+                <div className="menu-drop" onClick={handleMenuService}>
+                    <div className="menu-drop-header">
+                        <h2 className="drop-h2">
+                            <FaListOl className="icon-drop-h2" />
+                            <label>Categorias</label>
+                        </h2>
+                        <FaAngleDown className="icon-drop-down" />
+                    </div>
+                    {/* ---------------------- DROP DOWN ------------------------- */}
+                    <div className="box-drop service">
+                        <Link to="/categoria-servico" className="sidebar-link-drop">
+                            <FaUsers className="sidebar-link-icon" />
+                            <label>Categorias</label>
+                        </Link>
+                        {/* <Link to="/profissional/cadastro" className="sidebar-link-drop">
+                            <FaUserPlus className="sidebar-link-icon" />
+                            <span>Cadastro</span>
+                        </Link> */}
+                    </div>
+                </div>
+                {/* -------------------- AND SERVICES ---------------------- */}
 
                 <div className="menu-drop" onClick={handleMenuInventory}>
                     <div className="menu-drop-header">
@@ -222,7 +251,7 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                         </h2>
                         <FaAngleDown className="icon-drop-down" />
                     </div>
-                    {/* ----------------------------------------------- */}
+                    {/* ---------------------- DROP DOWN ------------------------- */}
                     <div className="box-drop inventory">
                         <Link to="/estoque/material-de-procedimentos" className="sidebar-link-drop">
                             <FaClipboardList className="sidebar-link-icon" />
@@ -253,7 +282,7 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                         </h2>
                         <FaAngleDown className="icon-drop-down" />
                     </div>
-                    {/* ----------------------------------------------- */}
+                    {/* ---------------------- DROP DOWN ------------------------- */}
                     <div className="box-drop financial">
                         <Link to="/despesas" className="sidebar-link-drop">
                             <FaClipboardList className="sidebar-link-icon" />

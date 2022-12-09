@@ -1,3 +1,12 @@
+:root {
+    --primary-color: #fd951f;
+    --bg-color: #130f0d;
+    --text-color: #f0f0f5;
+    --light-color: rgba(255, 255, 255, 0.04);
+    --bb-color: #666;
+    --border-color: rgba(0,0,0, 0.3)
+}
+
 .global__form__column {
     display: flex;
     flex-direction: column;
@@ -113,6 +122,14 @@ input[type="file"] {
     border: 1px solid var(--border-color);
     margin-bottom: 30px;
     border-radius: 6px;
+}
+
+.g__input__search {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-bottom: 1px solid #999;
+
 }
 
 .g__result__search {
@@ -242,4 +259,86 @@ input:-webkit-autofill {
     font-weight: 700;
     color: #555;
     font-size: 1.6rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    position: relative;
+    /* background-color: red; */
+}
+
+.input__store__group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.mc-label {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    height: 30px;
+    color: #666;
+    transition: .4s;
+    font-size: 1.6rem;
+}
+
+.mc-input {
+    width: 100%;
+    height: 40px;
+    appearance: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    background-color: transparent;
+    font-size: 1.6rem;
+    color: #666;
+}
+
+
+.mc-input:focus + label,
+.mc-input:valid  label {
+    transform: translateY(-24px);
+    font-size: 1rem;
+   
+}
+
+/* ###################### BOX FORM SIMPLE  ########################## */
+
+.g__box__form__simple {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    background-color: #efefef;
+}
+
+.g__form__simple__btn {
+    border-style: none;
+    width: 50px;
+    height: 50px;
+}
+
+.g__form__simple__btn:hover {
+    cursor: pointer;
+}
+
+.g__form__simple__input {
+    width: 100%;
+    height: 50px;
+    padding: 10px 15px;
+    border-style: none;
+    font-size: 1.6rem;
+}
+
+.g__form__simple__icon {
+    width: 50px;
+    height: 50px;
+    background-color: grey;
+    color: #fff;
+    font-size: 4px;
 }

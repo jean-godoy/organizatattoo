@@ -30,7 +30,8 @@ export const Professional = () => {
     const closeModal = () => {
         setModal(false);
     }
-
+    console.log(data);
+    
     return (
         <Dashboard>
             {modal ? <ModalProfessional professional={professional} closeModal={closeModal} /> : <div></div>}

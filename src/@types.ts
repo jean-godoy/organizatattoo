@@ -95,3 +95,9 @@ export type TUserInput = {
     is_active: boolean | number,
     rules: string
 }
+
+export type TResponse = {
+    status: boolean;
+    message: string;
+    data: []
+}

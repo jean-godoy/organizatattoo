@@ -1,9 +1,17 @@
 import API from "../utils/API";
 import { getBy } from "./useAPI";
 
-const getSearch = async (data: string) => {
+/**
+ * Retorna uma pesquisa na API pelo nome.
+ * ex url: api/professional-search
+ * ex data: Jon 
+ * @param url 
+ * @param data 
+ * @returns 
+ */
+const getSearch = async (url:string, data: string) => {
     try {
-        const response = await API.get(`/api/professional-search/${data}`, {
+        const response = await API.get(`${url}/${data}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Access': 'application/json'

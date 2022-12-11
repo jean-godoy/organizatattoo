@@ -1,5 +1,6 @@
 import { ChangeEvent, useContext, useState } from 'react';
 import { FaAngleDown, FaCalculator, FaClock, FaEdit, FaExpandAlt, FaFemale, FaFileUpload, FaPalette, FaRegTimesCircle, FaUser, FaUserTie, FaWindowRestore, FaWpforms } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/Auth/AuthContext';
 import { registerBudget } from '../../../services/budget/budgetService';
@@ -27,6 +28,7 @@ type TDataForm = {
 export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
 
     const { userData } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const [typeService, setTypeService] = useState<any>();
     const [subCategory, setSubCategory] = useState<any>();
@@ -78,23 +80,19 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
             formData.append('validated_at', handleDateFormatAmerican(date));
             formData.append('note', data.note);
         }
-        console.log( handleDateFormatAmerican(date));
-        
-        // console.log("image", image);
 
         if (formData) {
             const response = await registerBudget(formData);
             console.log("RESPONSE" , response);
             if(response.status) {
                 toast .success("Orçamento criado com sucesso.");
+                navigate('/orcamentos')
             }
 
             if(!response.status) {
                toast.warning("Ocoreu algum erro ao gerar orçamento.")        
             }
         }
-
-
     }
 
     return (

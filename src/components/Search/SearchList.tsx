@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import getSearch from "../../hooks/useSearch";
 
 import '../../styles/list.css';
-import '../../components/Modal/ModalBudgetForm/modalBudgetForm.css';
+import '../../components/Modal/Budget/modalBudgetForm.css';
 
 type TSearchListProps = {
     url: string;

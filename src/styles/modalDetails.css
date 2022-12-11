@@ -72,6 +72,11 @@
     margin-bottom: 15px;
 }
 
+.box-li-span-desc {
+    margin-left: 5px;
+}
+
+
 .modal-button {
     align-self: flex-end;
     width: 180px;

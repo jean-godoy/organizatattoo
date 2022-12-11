@@ -1,8 +1,9 @@
 import { ChangeEvent, useContext, useState } from 'react';
 import { FaAngleDown, FaCalculator, FaClock, FaEdit, FaExpandAlt, FaFemale, FaFileUpload, FaPalette, FaRegTimesCircle, FaUser, FaUserTie, FaWindowRestore, FaWpforms } from 'react-icons/fa';
-import { eventManager } from 'react-toastify/dist/core';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/Auth/AuthContext';
 import { registerBudget } from '../../../services/budget/budgetService';
+import { handleDate, handleDateFormatAmerican, handleFormatDateToOutput, handlePrice, handlePriceAmerican } from '../../../services/mask/maskService';
 import { BoxDropdown } from '../../BoxDropdown/BoxDropdown';
 import { BoxDropdownSub } from '../../BoxDropdown/BoxDropdownSub';
 import { SearchList } from '../../Search/SearchList';
@@ -33,6 +34,8 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
     const [professional, setProfessional] = useState<any>();
     const [image, setImage] = useState<any>();
     const [data, setData] = useState<TDataForm>({} as TDataForm);
+    const [price, setPrice] = useState<string>('');
+    const [date, setDate] = useState<string>('');
 
 
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -71,16 +74,24 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
             formData.append('sessions', data.sessions);
             formData.append('width', data.width);
             formData.append('heigth', data.heigth);
-            formData.append('price', data.price);
-            formData.append('validated_at', data.validated_at);
+            formData.append('price', handlePriceAmerican(price));
+            formData.append('validated_at', handleDateFormatAmerican(date));
             formData.append('note', data.note);
         }
-
+        console.log( handleDateFormatAmerican(date));
+        
         // console.log("image", image);
 
         if (formData) {
             const response = await registerBudget(formData);
-            console.log(response);
+            console.log("RESPONSE" , response);
+            if(response.status) {
+                toast .success("Orçamento criado com sucesso.");
+            }
+
+            if(!response.status) {
+               toast.warning("Ocoreu algum erro ao gerar orçamento.")        
+            }
         }
 
 
@@ -170,7 +181,15 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
                                     <FaFileUpload />
                                 </label>
                             </div>
+                        </div>
+                    </div>
 
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaWindowRestore />
+                            <span>Sessoẽs *</span>
+                        </header>
+                        <div className="input__group__orizontal">
                             <div className="input-group">
                                 <input required className="mc-input" type="number" name="sessions" onChange={handleInput} />
                                 <label className="mc-label">Número de Sessões</label>
@@ -185,11 +204,11 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
                         </header>
                         <div className="input-group">
                             <input required className="mc-input" type="text" name="width" onChange={handleInput} />
-                            <label className="mc-label">Largura</label>
+                            <label className="mc-label">Largura em centimetros</label>
                         </div>
                         <div className="input-group">
                             <input required className="mc-input" type="text" name="heigth" onChange={handleInput} />
-                            <label className="mc-label">Altura</label>
+                            <label className="mc-label">Altura em centimetros</label>
                         </div>
                     </div>
 
@@ -199,11 +218,11 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
                             <span>Total *</span>
                         </header>
                         <div className="input-group">
-                            <input required className="mc-input" type="text" name="validated_at" onChange={handleInput} />
+                            <input required className="mc-input" type="text" name="validated_at" value={date} onChange={e => setDate(handleDate(e.target.value))} />
                             <label className="mc-label">Válido até...</label>
                         </div>
                         <div className="input-group">
-                            <input required className="mc-input" type="text" name="price" onChange={handleInput} />
+                            <input required className="mc-input" type="text" name="price" value={price} onChange={(e) => setPrice(handlePrice(e.target.value))} />
                             <label className="mc-label">Valor R$</label>
                         </div>
                     </div>

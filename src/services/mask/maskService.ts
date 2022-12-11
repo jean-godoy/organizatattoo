@@ -1,4 +1,4 @@
-import { maskCEP, maskCpf, maskDate, maskPhone } from "../../utils/mask/mask";
+import { maskCEP, maskCpf, maskDate, maskPhone, maskPrice, maskPriceFormatAmerican } from "../../utils/mask/mask";
 
 export const handleCpf = (data: string | number) => {
     return maskCpf(data);
@@ -20,4 +20,17 @@ export const handleFormatDateToOutput = (date: string) => {
     const dateArray = date.split("-");
     return `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
     
+}
+
+export const handlePrice = (data: string) => {
+    return maskPrice(data);
+}
+
+export const handlePriceAmerican = (data: string) => {
+    return maskPriceFormatAmerican(data);
+}
+
+export const handleDateFormatAmerican = (data:string) => {
+    const dateArray = data.split("/");
+    return `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`;
 }

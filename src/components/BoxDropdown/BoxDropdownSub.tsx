@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaAngleDown, FaPalette } from "react-icons/fa";
 import { hookGetItem } from "../../hooks/hookGetItem";
-import { getAll } from "../../services/category/categoryService";
 
 type TItem = {
     id: string;

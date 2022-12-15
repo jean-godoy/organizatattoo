@@ -13,6 +13,7 @@ export const Calendar = () => {
     const [currentMonth, setCurrentMonth] = useState<number | any>(currentDate.month());
     const [currentYear, setCurrentYear] = useState(currentDate.year());
     const [modal, setModal] = useState<boolean>(false);
+    const [dateSelected, setDateSelected] = useState<string>('');
 
     const months = [
         "Janeiro",
@@ -36,17 +37,18 @@ export const Calendar = () => {
      * array com  a quantidade de dias.
      */
     // const CreateDaysCard = () => {
-        const lastDay = new Date(currentYear, currentMonth + 1, 0);
-        const lastDayDate = lastDay.getDate();
-        const totalDaysOfMonth = [];
+    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    const lastDayDate = lastDay.getDate();
 
-        for (var i = 0; i < lastDayDate; i++) {
-            totalDaysOfMonth.push(i);
-        }
-        //Adiciona o ultimo dia do mês no array.
-        totalDaysOfMonth.push(lastDayDate);
-        //Remove o indece 0.
-        totalDaysOfMonth.shift();
+    const totalDaysOfMonth = [];
+
+    for (var i = 0; i < lastDayDate; i++) {
+        totalDaysOfMonth.push(i);
+    }
+    //Adiciona o ultimo dia do mês no array.
+    totalDaysOfMonth.push(lastDayDate);
+    //Remove o indece 0.
+    totalDaysOfMonth.shift();
     // }
 
     /**
@@ -116,7 +118,8 @@ export const Calendar = () => {
 
     }
 
-    const handleCalendarModal = () => {
+    const handleCalendarModal = (data: number) => {
+        setDateSelected(`${data}/${currentMonth + 1}/${currentYear}`);
         setModal(true);
     }
 
@@ -127,7 +130,7 @@ export const Calendar = () => {
     return (
         <Dashboard>
             <div className="box-calendar">
-                {modal ? <CalendarModal closeModal={handleCloseModal} /> : <div></div> }
+                {modal ? <CalendarModal selectedDate={dateSelected} closeModal={handleCloseModal} /> : <div></div>}
                 <div className="calendar">
 
                     <div className="box-nav">
@@ -144,10 +147,10 @@ export const Calendar = () => {
                         ))}
 
                         {totalDaysOfMonth.map((item, index) => (
-                            <div 
-                                className="box-day" 
+                            <div
+                                className={(item === currentDay) ? "box-day current-day" : "box-day"}
                                 key={index}
-                                onClick={handleCalendarModal}
+                                onClick={() => handleCalendarModal(item)}
                             >
                                 {item}
                             </div>

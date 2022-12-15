@@ -32,3 +32,7 @@ export const maskPriceFormatAmerican = value => {
     );
 }
 
+export const maskHour = value => {
+    return mask(unMask(value), ['9:99', '99:99']);
+}
+

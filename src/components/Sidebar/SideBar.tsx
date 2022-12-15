@@ -257,6 +257,10 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                             <FaClipboardList className="sidebar-link-icon" />
                             <label>Material</label>
                         </Link>
+                        <Link to="/estoque/material-categorias" className="sidebar-link-drop">
+                            <FaClipboardList className="sidebar-link-icon" />
+                            <label>Categoria de Material</label>
+                        </Link>
                         <Link to="/estoque/piercing" className="sidebar-link-drop">
                             <FaSyringe className="sidebar-link-icon" />
                             <span>Piercings</span>

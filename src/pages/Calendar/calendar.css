@@ -95,6 +95,9 @@
     color: rgb(233, 66, 66);
 }
 
+.current-day {
+    background-color: rgba(0, 0, 0, .1 );
+}
 
 
 

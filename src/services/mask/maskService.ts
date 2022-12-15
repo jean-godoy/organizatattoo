@@ -1,4 +1,4 @@
-import { maskCEP, maskCpf, maskDate, maskPhone, maskPrice, maskPriceFormatAmerican } from "../../utils/mask/mask";
+import { maskCEP, maskCpf, maskDate, maskHour, maskPhone, maskPrice, maskPriceFormatAmerican } from "../../utils/mask/mask";
 
 export const handleCpf = (data: string | number) => {
     return maskCpf(data);
@@ -48,4 +48,8 @@ export function currency(value: string) {
 
     return value;
 
+}
+
+export const handleHour = (data: string) => {
+    return maskHour(data);
 }

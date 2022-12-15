@@ -1,10 +1,10 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import { handleDate, handleDateFormatAmerican, handlePrice, handlePriceAmerican } from "../../../services/mask/maskService";
 import { TemplateModal } from "../Template/TemplateModal";
-import { FaAngleDown, FaCalculator, FaClock, FaEdit, FaExpandAlt, FaFemale, FaFileUpload, FaPalette, FaRegTimesCircle, FaUser, FaUserTie, FaWindowRestore, FaWpforms } from 'react-icons/fa';
+import { FaAngleDown, FaCalculator, FaClock, FaEdit, FaExpandAlt, FaFemale, FaFileUpload, FaPalette, FaRegEdit, FaRegTimesCircle, FaUser, FaUserTie, FaWindowRestore, FaWpforms } from 'react-icons/fa';
 import { SearchList } from "../../Search/SearchList";
 import { BoxDropdown } from "../../BoxDropdown/BoxDropdown";
 import { BoxDropdownSub } from "../../BoxDropdown/BoxDropdownSub";
@@ -35,11 +35,16 @@ export const ModalBudgetEdit = ({ closeModal, budget }: TProps) => {
     const [costumer, setCostumer] = useState<any>();
     const [professional, setProfessional] = useState<any>();
     const [image, setImage] = useState<any>();
-    const [data, setData] = useState<TDataForm>({} as TDataForm);
+    const [data, setData] = useState<any>();
     const [price, setPrice] = useState<string>('');
     const [date, setDate] = useState<string>('');
 
-    
+    useEffect(() => {
+        setData(budget);
+        setDate(budget.validated_at);
+        setPrice(budget.price);
+        setCostumer({ costumer_id: budget.costumer_id, costumer_name: budget.costumer_name });
+    }, []);
 
     const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -96,156 +101,170 @@ export const ModalBudgetEdit = ({ closeModal, budget }: TProps) => {
         //     }
         // }
     }
+    console.log(costumer);
 
-        return (
-            <TemplateModal>
-                <div className="m__budget__box">
-                    <header className="m__budget__header">
-                        <span className="header__title">Editar Orçamento</span>
-                        <FaRegTimesCircle className="modal__budget__icon" onClick={closeModal} />
-                    </header>
+    return (
+        <TemplateModal>
+            <div className="m__budget__box">
+                <header className="m__budget__header">
+                    <span className="header__title">Editar Orçamento</span>
+                    <FaRegTimesCircle className="modal__budget__icon" onClick={closeModal} />
+                </header>
 
-                    <form onSubmit={handleSubmit} className="m__budget__form" >
+                <form onSubmit={handleSubmit} className="m__budget__form" >
 
-                        <div className="box-input-content">
-                            <header className="box-input-content-header">
-                                <FaUser />
-                                <span>Selecione um Cliente *</span>
-                            </header>
-
-                            <SearchList
-                                url="/api/costumer-search"
-                                result={(data) => setCostumer(data)}
-                            />
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaRegEdit />
+                            <span>Nome do Orçamento *</span>
+                        </header>
+                        <div className="input-group">
+                            <input required className="mc-input" name="name" value={data?.name} onChange={handleInput} type="text" />
+                            <label className="mc-label">Região</label>
                         </div>
+                    </div>
 
-                        <div className="box-input-content">
-                            <header className="box-input-content-header">
-                                <FaUserTie />
-                                <span>Selecione um Proficional *</span>
-                            </header>
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaUser />
+                            <span>Selecione um Cliente *</span>
+                        </header>
 
-                            <SearchList
-                                url="/api/professional-search"
-                                result={(data) => setProfessional(data)}
+                        <SearchList
+                            url="/api/costumer-search"
+                            result={(data) => setCostumer(data)}
+                            edit={budget.costumer_name}
+                        />
+                    </div>
+
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaUserTie />
+                            <span>Selecione um Proficional *</span>
+                        </header>
+
+                        <SearchList
+                            url="/api/professional-search"
+                            result={(data) => setProfessional(data)}
+                            edit={budget.professional_name}
+                        />
+
+                    </div>
+
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaWpforms />
+                            <span>Tipo do Serviço *</span>
+                        </header>
+
+                        <div className="input__group__orizontal">
+                            <BoxDropdown
+                                url="/api/category"
+                                title="Tipo do Serviço *"
+                                itemSelected={(item) => getTypeService(item)}
                             />
 
-                        </div>
-
-                        <div className="box-input-content">
-                            <header className="box-input-content-header">
-                                <FaWpforms />
-                                <span>Tipo do Serviço *</span>
-                            </header>
-
-                            <div className="input__group__orizontal">
-                                <BoxDropdown
-                                    url="/api/category"
-                                    title="Tipo do Serviço *"
-                                    itemSelected={(item) => getTypeService(item)}
+                            {typeService ?
+                                <BoxDropdownSub
+                                    url={`/api/sub-category/${typeService.id}`}
+                                    title="Categoria *"
+                                    itemSelected={(item) => getSubCategory(item)}
                                 />
+                                :
+                                <div></div>
+                            }
 
-                                {typeService ?
-                                    <BoxDropdownSub
-                                        url={`/api/sub-category/${typeService.id}`}
-                                        title="Categoria *"
-                                        itemSelected={(item) => getSubCategory(item)}
-                                    />
-                                    :
-                                    <div></div>
-                                }
-
-                            </div>
                         </div>
+                    </div>
 
-                        <div className="box-input-content">
-                            <header className="box-input-content-header">
-                                <FaFemale />
-                                <span>Região do Corpo *</span>
-                            </header>
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaFemale />
+                            <span>Região do Corpo *</span>
+                        </header>
+                        <div className="input-group">
+                            <input required className="mc-input" name="body_region" value={data?.body_region} onChange={handleInput} type="text" />
+                            <label className="mc-label">Região</label>
+                        </div>
+                    </div>
+
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaWindowRestore />
+                            <span>Projeto *</span>
+                        </header>
+                        <div className="input__group__orizontal">
                             <div className="input-group">
-                                <input required className="mc-input" name="body_region" onChange={handleInput} type="text" />
-                                <label className="mc-label">Região</label>
+                                <input required className="mc-input" type="file" name="project_image" id="file" onChange={handImage} />
+                                <label className="label__input" htmlFor="file">
+                                    <span>Selecione um projeto</span>
+                                    <FaFileUpload />
+                                </label>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="box-input-content">
-                            <header className="box-input-content-header">
-                                <FaWindowRestore />
-                                <span>Projeto *</span>
-                            </header>
-                            <div className="input__group__orizontal">
-                                <div className="input-group">
-                                    <input required className="mc-input" type="file" name="project_image" id="file" onChange={handImage} />
-                                    <label className="label__input" htmlFor="file">
-                                        <span>Selecione um projeto</span>
-                                        <FaFileUpload />
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="box-input-content">
-                            <header className="box-input-content-header">
-                                <FaWindowRestore />
-                                <span>Sessoẽs *</span>
-                            </header>
-                            <div className="input__group__orizontal">
-                                <div className="input-group">
-                                    <input required className="mc-input" type="number" name="sessions" onChange={handleInput} />
-                                    <label className="mc-label">Número de Sessões</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="box-input-content">
-                            <header className="box-input-content-header">
-                                <FaExpandAlt />
-                                <span>Tamanho </span>
-                            </header>
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaWindowRestore />
+                            <span>Sessoẽs *</span>
+                        </header>
+                        <div className="input__group__orizontal">
                             <div className="input-group">
-                                <input required className="mc-input" type="text" name="width" onChange={handleInput} />
-                                <label className="mc-label">Largura em centimetros</label>
-                            </div>
-                            <div className="input-group">
-                                <input required className="mc-input" type="text" name="heigth" onChange={handleInput} />
-                                <label className="mc-label">Altura em centimetros</label>
+                                <input required className="mc-input" value={data?.sessions} type="number" name="sessions" onChange={handleInput} />
+                                <label className="mc-label">Número de Sessões</label>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="box-input-content">
-                            <header className="box-input-content-header">
-                                <FaCalculator />
-                                <span>Total *</span>
-                            </header>
-                            <div className="input-group">
-                                <input required className="mc-input" type="text" name="validated_at" value={date} onChange={e => setDate(handleDate(e.target.value))} />
-                                <label className="mc-label">Válido até...</label>
-                            </div>
-                            <div className="input-group">
-                                <input required className="mc-input" type="text" name="price" value={price} onChange={(e) => setPrice(handlePrice(e.target.value))} />
-                                <label className="mc-label">Valor R$</label>
-                            </div>
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaExpandAlt />
+                            <span>Tamanho </span>
+                        </header>
+                        <div className="input-group">
+                            <input required className="mc-input" type="text" name="width" value={data?.width} onChange={handleInput} />
+                            <label className="mc-label">Largura em centimetros</label>
                         </div>
-
-                        <div className="box-input-content">
-                            <header className="box-input-content-header">
-                                <FaEdit />
-                                <span>Observações </span>
-                            </header>
-                            <div className="input-group">
-                                <input required className="mc-input" type="text" name="note" onChange={handleInput} />
-                                <label className="mc-label">Obs..</label>
-                            </div>
+                        <div className="input-group">
+                            <input required className="mc-input" type="text" name="heigth" value={data?.heigth} onChange={handleInput} />
+                            <label className="mc-label">Altura em centimetros</label>
                         </div>
+                    </div>
 
-                        <div className="box-button">
-                            <button className="btn bt-cancel" onClick={closeModal} >Cancelar</button>
-                            <button className="btn">Gerar Orçamento</button>
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaCalculator />
+                            <span>Total *</span>
+                        </header>
+                        <div className="input-group">
+                            <input required className="mc-input" type="text" name="validated_at" value={date} onChange={e => setDate(handleDate(e.target.value))} />
+                            <label className="mc-label">Válido até...</label>
                         </div>
+                        <div className="input-group">
+                            <input required className="mc-input" type="text" name="price" value={price} onChange={(e) => setPrice(handlePrice(e.target.value))} />
+                            <label className="mc-label">Valor R$</label>
+                        </div>
+                    </div>
 
-                    </form>
-                </div>
-            </TemplateModal>
-        );
-    }
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaEdit />
+                            <span>Observações </span>
+                        </header>
+                        <div className="input-group">
+                            <input required className="mc-input" type="text" name="note" value={data?.note} onChange={handleInput} />
+                            <label className="mc-label">Obs..</label>
+                        </div>
+                    </div>
+
+                    <div className="box-button">
+                        <button className="btn bt-cancel" onClick={closeModal} >Cancelar</button>
+                        <button className="btn">Gerar Orçamento</button>
+                    </div>
+
+                </form>
+            </div>
+        </TemplateModal>
+    );
+}

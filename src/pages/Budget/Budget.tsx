@@ -6,7 +6,7 @@ import { FaPlus, FaTimes } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { showBudgets } from '../../services/budget/budgetService';
 import Loading from '../../components/Loading/Loading';
-import { ModalBudgetShow } from '../../components/Modal/Budget/ModalBudgetShow';
+import { ModalBudgetDetails } from '../../components/Modal/Budget/ModalBudgetDetails';
 import { ModalBudgetForm } from '../../components/Modal/Budget/ModalBudgetForm';
 
 export const Budget = () => {
@@ -23,7 +23,7 @@ export const Budget = () => {
             const response = await showBudgets();
 
             if (response.status) {
-                setBudgets(response.data);
+                setBudgets(response.data.data);
                 setLoading(false)
             }
         })();
@@ -50,7 +50,7 @@ export const Budget = () => {
         <Dashboard>
             {loading ? <Loading /> : <div></div>}
             {modal ? <ModalBudgetForm closeModal={handleCloseModal} /> : <div></div>}
-            {modalDetails ? <ModalBudgetShow data={dataDetails} closeModal={handleCloseModalDetails} /> : <div></div>}
+            {modalDetails ? <ModalBudgetDetails data={dataDetails} closeModal={handleCloseModalDetails} /> : <div></div>}
             <Main>
                 <Content>
                     <header className="content__header">
@@ -63,13 +63,19 @@ export const Budget = () => {
 
                     <ul className="g__list__ul">
                         {budgets?.map((item: any, index: number) => (
-                            <li className="g__list__li" key={index} onClick={() => handleShowModalDetails(item)} >
-                                <span className="g__list__li__name">Orçamento:</span>
-                                <span className="g__list__li__value">{item.costumer_name}</span>
+                            <li className="g__li__card" key={index} onClick={() => handleShowModalDetails(item)} >
+                                <div className="g__li__card__group">
+                                    <span className="g__list__li__name">Cliente:</span>
+                                    <span className="g__list__li__value">{item.costumer_name}</span>
+                                </div>
+                                <div className="g__li__card__group">
+                                    <span className="g__list__li__name">Orçamento:</span>
+                                    <span className="g__list__li__value">{item.name}</span>
+                                </div>
                             </li>
                         ))}
 
-                       
+
                     </ul>
 
                 </Content>

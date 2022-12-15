@@ -8,26 +8,33 @@ type TSearchListProps = {
     url: string;
     result: (data: any) => any;
     placeholder?: string;
+    edit?: string;
 }
 
-export const SearchList = ({ url, result, placeholder }: TSearchListProps) => {
+export const SearchList = ({ url, result, placeholder, edit }: TSearchListProps) => {
 
     const [res, setRes] = useState<any | null>(null);
     const [search, setSearch] = useState<string>('');
     const [value, setValue] = useState<string>('');
 
     useEffect(() => {
-        (async () => {
-            if (search.length > 2) {
-                const response = await getSearch(url, search);
-                
-                if (response.status) {
-                    setRes(response.data)
+            (async () => {
+                if (search.length > 2) {
+                    const response = await getSearch(url, search);
+                    
+                    if (response.status) {
+                        setRes(response.data)
+                    }
                 }
-            }
-        })();
-
+            })();
+            setDataEdit();
     }, [search]);
+
+    const setDataEdit = () => {
+        if(edit?.length) {
+            setSearch(edit);
+        }
+    }
 
     const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
         if(result.length <= 1) {

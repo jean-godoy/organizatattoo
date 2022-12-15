@@ -37,19 +37,19 @@ export const ModalMaterial = ({ closeModal }: TMaterial) => {
                 <form className="global__form__column">
 
                     <ListSearchSingle
-                        description="Selecione uma Marca *"
-                        liTitle="Marca"
-                        placeholder="Digite o nome da marca"
-                        service={searchSingleService}
-                        result={getResult}
-                    />
-
-                    <ListSearchSingle
                         description="Selecione uma Categoria *"
                         liTitle="Categoria"
                         placeholder="Digite a categoria"
                         service={searchCategoryService}
                         result={getCategory}
+                    />
+
+                    <ListSearchSingle
+                        description="Selecione uma Marca *"
+                        liTitle="Marca"
+                        placeholder="Digite o nome da marca"
+                        service={searchSingleService}
+                        result={getResult}
                     />
 
                     <div className="g__input__content">

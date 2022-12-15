@@ -2,7 +2,7 @@ import { FaRegTimesCircle } from "react-icons/fa";
 import { TemplateContentColumn } from "../Template/TemplateContentColumn";
 import { TemplateModal } from "../Template/TemplateModal";
 import { currency, handleFormatDateToOutput, handlePrice } from '../../../services/mask/maskService';
-import { useEffect, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import { ModalBudgetEdit } from "./ModalBudgetEdit";
 import { ModalBudgetImage } from "./ModalBudgetImage";
 
@@ -11,15 +11,23 @@ type TProps = {
     closeModal: () => void;
 }
 
-export const ModalBudgetShow = ({ data, closeModal }: TProps) => {
+export const ModalBudgetDetails = ({ data, closeModal }: TProps) => {
 
     const [modal, setModal] = useState<boolean>(false);
     const [budget, setBudget] = useState<any>();
     const [modalImage, setModalImage] = useState<boolean>(false);
+    const [esc, setEsc] = useState<any>();
 
     useEffect(() => {
         setBudget(data);
     }, []);
+
+    const handleKeyboardEvent = (e: KeyboardEvent<HTMLDivElement>) => {
+        alert()
+        console.log(e.key);
+
+    };
+
 
     const openModal = () => setModal(true);
     const closeEditModal = () => setModal(false);
@@ -29,15 +37,21 @@ export const ModalBudgetShow = ({ data, closeModal }: TProps) => {
 
     return (
         <TemplateModal>
-            { modal ? <ModalBudgetEdit budget={budget} closeModal={closeEditModal} /> : <div></div> }
-            { modalImage ? <ModalBudgetImage closeModal={closeModalImage} urlImage={data.url_image} /> : <div></div> }
-            <div className="m__budget__box">
+            {modal ? <ModalBudgetEdit budget={budget} closeModal={closeEditModal} /> : <div></div>}
+            {modalImage ? <ModalBudgetImage closeModal={closeModalImage} urlImage={data.url_image} /> : <div></div>}
+            <div className="m__budget__box" onKeyUp={(e) => handleKeyboardEvent(e)} >
                 <header className="m__budget__header">
                     <span className="header__title">Orçamento de {data?.costumer_name}</span>
                     <FaRegTimesCircle className="modal__budget__icon" onClick={closeModal} />
                 </header>
 
                 <ul className="box-ul">
+
+                    <li className="box-li">
+                        <samp className="li-title">Nome do Orçamento:</samp>
+                        <samp className="box-li-span-desc">{data.name}</samp>
+                    </li>
+
                     <li className="box-li">
                         <samp className="li-title">Cliente:</samp>
                         <samp className="box-li-span-desc">{data.costumer_name}</samp>
@@ -94,11 +108,11 @@ export const ModalBudgetShow = ({ data, closeModal }: TProps) => {
                         <samp className="box-li-span-desc">{data.note}</samp>
                     </li>
 
-                    <li className="box-li">
-                        {/* <samp className="li-title">Imagem do projeto:</samp> */}
-                        {/* <img src={`http://localhost:8000${data.url_image}`} alt="" /> */}
-                        <button className="btn" onClick={openModalImage} >Vizualizar imagem do projeto</button>
-                    </li>
+                    {data.url_image && (
+                        <li className="box-li">
+                            <button className="btn" onClick={openModalImage} >Vizualizar imagem do projeto</button>
+                        </li>
+                    )}
 
                 </ul>
 

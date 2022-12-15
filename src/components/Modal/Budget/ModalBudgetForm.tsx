@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext, useState } from 'react';
-import { FaAngleDown, FaCalculator, FaClock, FaEdit, FaExpandAlt, FaFemale, FaFileUpload, FaPalette, FaRegTimesCircle, FaUser, FaUserTie, FaWindowRestore, FaWpforms } from 'react-icons/fa';
+import { FaAngleDown, FaCalculator, FaClock, FaEdit, FaExpandAlt, FaFemale, FaFileUpload, FaPalette, FaRegEdit, FaRegTimesCircle, FaUser, FaUserTie, FaWindowRestore, FaWpforms } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/Auth/AuthContext';
@@ -16,6 +16,7 @@ interface IModalForm {
 }
 
 type TDataForm = {
+    name:string,
     body_region: string,
     sessions: string,
     width: string,
@@ -57,7 +58,7 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
 
     const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
-       
+
         const userId = userData.studioUuid
 
         const formData = new FormData();
@@ -66,6 +67,7 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
             formData.append('user_id ', userId);
             formData.append('studio_id', userData.studioUuid);
             formData.append('costumer_id', costumer.uuid);
+            formData.append('name', data.name);
             formData.append('costumer_name', costumer.name);
             formData.append('professional_id', professional.id);
             formData.append('professional_name', professional.name);
@@ -83,14 +85,14 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
 
         if (formData) {
             const response = await registerBudget(formData);
-            console.log("RESPONSE" , response);
-            if(response.status) {
-                toast .success("Orçamento criado com sucesso.");
+            console.log("RESPONSE", response);
+            if (response.status) {
+                toast.success("Orçamento criado com sucesso.");
                 navigate('/orcamentos')
             }
 
-            if(!response.status) {
-               toast.warning("Ocoreu algum erro ao gerar orçamento.")        
+            if (!response.status) {
+                toast.warning("Ocoreu algum erro ao gerar orçamento.")
             }
         }
     }
@@ -103,6 +105,17 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
                     <FaRegTimesCircle className="modal__budget__icon" onClick={closeModal} />
                 </header>
                 <form onSubmit={handleSubmit} className="m__budget__form" >
+
+                    <div className="box-input-content">
+                        <header className="box-input-content-header">
+                            <FaRegEdit />
+                            <span>Nome do Orçamento *</span>
+                        </header>
+                        <div className="input-group">
+                            <input required className="mc-input" name="name" onChange={handleInput} type="text" />
+                            <label className="mc-label">Nome</label>
+                        </div>
+                    </div>
 
                     <div className="box-input-content">
                         <header className="box-input-content-header">

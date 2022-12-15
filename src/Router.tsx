@@ -19,6 +19,7 @@ import { User } from "./pages/User/User";
 import { Register } from "./pages/Register/Register";
 import { NewBudget } from "./pages/Budget/NewBudget";
 import { Service } from "./pages/Category/Category";
+import { MaterialCategory } from "./pages/Material/MaterialCategory";
 
 export const Router = () => {
 
@@ -55,6 +56,7 @@ export const Router = () => {
                 <Route path="/categoria-servico" element={<Private><Service /></Private>} />
 
                 <Route path="/estoque/material-de-procedimentos" element={<Private><Material /></Private>} />
+                <Route path="/estoque/material-categorias" element={<Private><MaterialCategory /></Private>} />
 
                 <Route path="/orcamentos" element={<Private><Budget /></Private>} />
                 <Route path="/orcamentos/novo-orcamento" element={<Private><NewBudget /></Private>} />

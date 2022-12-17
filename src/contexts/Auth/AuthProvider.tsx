@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { TokenType, TUserData, UserLogged, UserType } from "../../@types";
 import { loginInfo } from "../../services/auth/loginInfoService";
 import loginService from "../../services/auth/loginService";
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
                 const getLoginInfo: any = async (email: string) => {
 
                     const response: any = await loginInfo(email);
-
+                    
                     if (response.status) {
                         setUserData(
                             {
@@ -65,8 +66,13 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
 
             const response = await loginService(email, password);
-
-            if (response.status) {
+          
+            if(response.code === 401) {
+                toast.warning(`${response.message}`);
+                return response;
+            }
+            
+            if (response.code === 200) {
 
                 userLogged.email = response.data.user.email;
                 userLogged.name = response.data.user.name;
@@ -75,6 +81,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
                 localStorage.setItem('@token', response.data.token);
 
                 if (userData) {
+                    toast.success(`${response.message}`)
                     setLoading(false);
                     return true;
                 }

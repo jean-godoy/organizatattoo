@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, useContext, useEffect } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Loading from '../../components/Loading/Loading';
 import { AuthContext } from '../../contexts/Auth/AuthContext';
 import { ToastifyContext } from '../../contexts/Toastify/ToastifyContext';
@@ -39,8 +40,12 @@ export const Login = () => {
         if (email && password) {
             const res: any = await auth.login(email, password);
 
+            if(res.code === 401) {
+                setIsLoading(false);
+            }
+            
             if (!auth.loading) {
-                writeMessage('Usuário logado com sucesso');
+                toast.success('Usuário logado com sucesso');
                 setIsLoading(false);
                 navigate('/');
                 window.location.reload();

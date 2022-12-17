@@ -23,8 +23,8 @@ export const Budget = () => {
             const response = await showBudgets();
             console.log("RES", response.data);
             
-            if (response.data.data.length) {
-                setBudgets(response.data);
+            if (response.data.data) {
+                setBudgets(response.data.data);
                 setLoading(false)
             }
 

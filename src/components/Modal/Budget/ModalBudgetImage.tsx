@@ -16,7 +16,7 @@ export const ModalBudgetImage = ({ urlImage, closeModal }: TProps) => {
                     <FaRegTimesCircle className="modal__budget__icon" onClick={closeModal} />
                 </header>
                 <div className="m__budget__box">
-                    <img src={`http://localhost:8000${urlImage}`} alt="Imagem do projeto" />
+                    <img src={`${process.env.REACT_APP_API}${urlImage}`} alt="Imagem do projeto" />
                 </div>
             </div>
         </TemplateModal>

@@ -21,10 +21,15 @@ export const Budget = () => {
         setLoading(true);
         (async () => {
             const response = await showBudgets();
-            console.log("RES", response);
+            console.log("RES", response.data);
             
-            if (response.status) {
+            if (response.data.data.length) {
                 setBudgets(response.data);
+                setLoading(false)
+            }
+
+
+            if (!response.data.data.length) {
                 setLoading(false)
             }
         })();
@@ -63,18 +68,29 @@ export const Budget = () => {
                     </header>
 
                     <ul className="g__list__ul">
-                        {budgets?.map((item: any, index: number) => (
-                            <li className="g__li__card" key={index} onClick={() => handleShowModalDetails(item)} >
-                                <div className="g__li__card__group">
-                                    <span className="g__list__li__name">Cliente:</span>
-                                    <span className="g__list__li__value">{item.costumer_name}</span>
-                                </div>
-                                <div className="g__li__card__group">
-                                    <span className="g__list__li__name">Orçamento:</span>
-                                    <span className="g__list__li__value">{item.name}</span>
-                                </div>
-                            </li>
-                        ))}
+                        { 
+                            budgets ? (
+                                budgets?.map((item: any, index: number) => (
+                                    <li className="g__li__card" key={index} onClick={() => handleShowModalDetails(item)} >
+                                        <div className="g__li__card__group">
+                                            <span className="g__list__li__name">Cliente:</span>
+                                            <span className="g__list__li__value">{item.costumer_name}</span>
+                                        </div>
+                                        <div className="g__li__card__group">
+                                            <span className="g__list__li__name">Orçamento:</span>
+                                            <span className="g__list__li__value">{item.name}</span>
+                                        </div>
+                                    </li>
+                                ))
+                            ) : 
+                            <li className="g__li__card"  >
+                                        <div className="g__li__card__group">
+                                            <span className="g__list__li__name">Mensagem:</span>
+                                            <span className="g__list__li__value">Nenhum orçamento cadastrado</span>
+                                        </div>
+                                
+                                    </li>
+                        }
 
 
                     </ul>

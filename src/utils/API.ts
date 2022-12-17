@@ -6,8 +6,8 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 axios.defaults.headers.authorization = `Bearer ${token}`;
 
 const API = axios.create({
-    // baseURL: process.env.REACT_APP_API
-    baseURL: 'https://organizatattoo-55l5x.ondigitalocean.app'
+    baseURL: process.env.REACT_APP_API
+    // baseURL: 'https://organizatattoo-55l5x.ondigitalocean.app'
 });
 
 

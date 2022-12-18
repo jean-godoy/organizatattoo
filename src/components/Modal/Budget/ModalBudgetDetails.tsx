@@ -1,10 +1,14 @@
-import { FaRegTimesCircle } from "react-icons/fa";
+import { FaRegTimesCircle, FaTrashAlt } from "react-icons/fa";
 import { TemplateContentColumn } from "../Template/TemplateContentColumn";
 import { TemplateModal } from "../Template/TemplateModal";
 import { currency, handleFormatDateToOutput, handlePrice } from '../../../services/mask/maskService';
 import { KeyboardEvent, useEffect, useState } from "react";
 import { ModalBudgetEdit } from "./ModalBudgetEdit";
 import { ModalBudgetImage } from "./ModalBudgetImage";
+import { Warning } from "../Alert/Warning";
+import { destroyBudget } from "../../../services/budget/budgetService";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 type TProps = {
     data: any;
@@ -13,10 +17,13 @@ type TProps = {
 
 export const ModalBudgetDetails = ({ data, closeModal }: TProps) => {
 
+    const navigate = useNavigate();
+
     const [modal, setModal] = useState<boolean>(false);
     const [budget, setBudget] = useState<any>();
     const [modalImage, setModalImage] = useState<boolean>(false);
     const [esc, setEsc] = useState<any>();
+    const [modalAlert, setModalAlert] = useState<boolean>(false);
 
     useEffect(() => {
         setBudget(data);
@@ -35,10 +42,54 @@ export const ModalBudgetDetails = ({ data, closeModal }: TProps) => {
     const openModalImage = () => setModalImage(true);
     const closeModalImage = () => setModalImage(false);
 
+    const openModalAlert = () => {
+        setModalAlert(true);
+    }
+
+    const closeModalAlert = () => setModalAlert(false);
+
+    const getModalAlertResponse = async (res: boolean): Promise<any> => {
+        if (res) {
+            const response = await destroyBudget('/api/budget', data.id);
+            console.log(response);
+            if (response.code === 204) {
+                toast.success(`${response.message}`);
+                closeModal();
+                navigate('/orcamentos');
+            }
+
+            if (response.code === 501) {
+                toast.warning('Occoreu algum erro ao deletar orçamento, tente novamente mais tarde.');
+            }
+        }
+
+
+    }
+
+    const handleDestroy = async () => {
+        const response = await destroyBudget('/api/budget', data.id);
+        console.log(response);
+        if (response.code === 204) {
+            toast.success(`${response.message}`);
+            closeModal();
+        }
+    }
+
+
     return (
         <TemplateModal>
+
             {modal ? <ModalBudgetEdit budget={budget} closeModal={closeEditModal} /> : <div></div>}
             {modalImage ? <ModalBudgetImage closeModal={closeModalImage} urlImage={data.url_image} /> : <div></div>}
+            {modalAlert ? <Warning
+                title="Deseja deletar orçamento?"
+                response={getModalAlertResponse}
+                close={closeModalAlert}
+            />
+                :
+                <div></div>
+            }
+
             <div className="m__budget__box" onKeyUp={(e) => handleKeyboardEvent(e)} >
                 <header className="m__budget__header">
                     <span className="header__title">Orçamento de {data?.costumer_name}</span>
@@ -116,7 +167,11 @@ export const ModalBudgetDetails = ({ data, closeModal }: TProps) => {
 
                 </ul>
 
-                <div className="box-button">
+                <div className="box__button__group">
+                    <button className="bt__delete" onClick={openModalAlert} >
+                        Deletar
+                        <FaTrashAlt />
+                    </button>
                     <button className="btn" onClick={openModal} >Editar</button>
                     <button className="btn" onClick={closeModal} >OK</button>
                 </div>

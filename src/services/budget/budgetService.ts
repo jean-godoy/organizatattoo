@@ -1,4 +1,4 @@
-import { create, all } from '../../hooks/useAPI';
+import { create, all, destroy,  } from '../../hooks/useAPI';
 import API from '../../utils/API';
 
 export const registerBudget = async (data: any) => {
@@ -24,3 +24,13 @@ export const showBudgets = async () => {
         
     }
 }
+
+export const destroyBudget = async (url: string, id: string) => {
+    try {
+        const response = await destroy(url, id);
+        return response?.data;
+    } catch (error) {
+        console.log("ERROR SHOW BUDGETS DESTROY ", error);
+        
+    }
+}   

@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './styles/form.css';
 import './styles/list.css';
+import './styles/button.css';
 import './styles/modalDetails.css';
+import './styles/modalDetails.css';
+import './styles/modal.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

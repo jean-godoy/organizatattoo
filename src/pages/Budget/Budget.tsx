@@ -21,7 +21,6 @@ export const Budget = () => {
         setLoading(true);
         (async () => {
             const response = await showBudgets();
-            console.log("RES", response.data);
             
             if (response.data.data) {
                 setBudgets(response.data.data);

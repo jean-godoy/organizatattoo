@@ -1,0 +1,23 @@
+.m__alert__box {
+    display: flex;
+   flex-direction: column;
+   width: 100%;
+   max-width: 960px;
+   height: 20vh;
+   background-color: #efefef;
+   border-radius: 8px;
+   overflow-y: scroll;
+}
+
+.m__alert__content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    
+}
+
+.m__header__red {
+    background-color: rgb(255, 5, 5, 0.7);
+    color: #efefef !important;
+}

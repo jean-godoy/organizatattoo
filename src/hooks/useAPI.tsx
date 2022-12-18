@@ -62,6 +62,22 @@ export const create = async (url: string, data: any) => {
     }
 }
 
+export const destroy = async (url: string, id: string) => {
+    try {
+        const response = await API.delete(`${url}/${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access': 'application/json'
+            }
+        });
+
+        return response;
+    } catch (error) {
+        console.log("ERROR", error);
+
+    }
+}
+
 
 
 

@@ -16,20 +16,22 @@ export const Budget = () => {
     const [budgets, setBudgets] = useState<any>();
     const [loading, setLoading] = useState<boolean>(false);
     const [dataDetails, setDataDetails] = useState<any>();
+    const [isEmpty, setIsEmpty] = useState<boolean>(false);
 
     useEffect(() => {
         setLoading(true);
         (async () => {
             const response = await showBudgets();
-            
+
             if (response.data.data) {
                 setBudgets(response.data.data);
-                setLoading(false)
+                setLoading(false);
             }
 
 
             if (!response.data.data.length) {
-                setLoading(false)
+                setLoading(false);
+                setIsEmpty(true);
             }
         })();
     }, []);
@@ -61,41 +63,39 @@ export const Budget = () => {
                     <header className="content__header">
                         <span>Orçamentos</span>
                         <div className="header__right" onClick={handleOpenModal}>
-                            <span>Novo Orçamento</span>
+                            <span>Novo Orçamento.</span>
                             <FaPlus />
                         </div>
                     </header>
 
                     <ul className="g__list__ul">
-                        { 
-                            budgets ? (
-                                budgets?.map((item: any, index: number) => (
-                                    <li className="g__li__card" key={index} onClick={() => handleShowModalDetails(item)} >
-                                        <div className="g__li__card__group">
-                                            <span className="g__list__li__name">Cliente:</span>
-                                            <span className="g__list__li__value">{item.costumer_name}</span>
-                                        </div>
-                                        <div className="g__li__card__group">
-                                            <span className="g__list__li__name">Orçamento:</span>
-                                            <span className="g__list__li__value">{item.name}</span>
-                                        </div>
-                                    </li>
-                                ))
-                            ) : 
-                            <li className="g__li__card"  >
-                                        <div className="g__li__card__group">
-                                            <span className="g__list__li__name">Mensagem:</span>
-                                            <span className="g__list__li__value">Nenhum orçamento cadastrado</span>
-                                        </div>
-                                
-                                    </li>
+                        {
+                            budgets?.map((item: any, index: number) => (
+                                <li className="g__li__card" key={index} onClick={() => handleShowModalDetails(item)} >
+                                    <div className="g__li__card__group">
+                                        <span className="g__list__li__name">Cliente:</span>
+                                        <span className="g__list__li__value">{item.costumer_name}</span>
+                                    </div>
+                                    <div className="g__li__card__group">
+                                        <span className="g__list__li__name">Orçamento:</span>
+                                        <span className="g__list__li__value">{item.name}</span>
+                                    </div>
+                                </li>
+                            ))
+
                         }
 
-
+                        {isEmpty && (
+                            <li className="g__li__card" >
+                                <div className="g__li__card__group">
+                                    <span className="g__list__li__name">Nenhum orçamento cadastrado</span>
+                                </div>
+                            </li>
+                        )}
                     </ul>
 
                 </Content>
             </Main>
-        </Dashboard>
+        </Dashboard >
     );
 }

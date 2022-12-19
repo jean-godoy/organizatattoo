@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
-import { FaRegTimesCircle } from "react-icons/fa";
+import { FaExclamationTriangle } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { registerCategory } from "../../../services/category/categoryService";
+import { registerModalCategory } from "../../../services/modal/modalGenereciCategoryService";
 import { TemplateContentColumn } from "../Template/TemplateContentColumn";
 import { TemplateModal } from "../Template/TemplateModal";
 
@@ -12,7 +12,15 @@ type TModalServiceProps = {
     closeModal: () => void;
 }
 
-export const ModalMaterialCategory = ({ url, title, label, closeModal }: TModalServiceProps) => {
+
+/**
+ * Modal Generica que salva uma só categoria na DB.
+ * Antes da inserção, faz a vereficação para não gerar 
+ * duplicates. 
+ * @param url, title, label 
+ * @returns 
+ */
+export const ModalGenericCategoryForm = ({ url, title, label, closeModal }: TModalServiceProps) => {
 
     const [category, setCategory] = useState<string>('');
 
@@ -24,9 +32,14 @@ export const ModalMaterialCategory = ({ url, title, label, closeModal }: TModalS
         e.preventDefault();
 
         const data = {
-            "category": category
+            "product_name": category
         }
-        const response = await registerCategory(data);
+        const response = await registerModalCategory(url, data);
+        console.log(response);
+        
+        if(response.is_replicated) {
+            toast.warning(`${response.message}`);
+        }
 
         if (!response.status) {
             toast.warning(`${response.message}.`);
@@ -44,7 +57,7 @@ export const ModalMaterialCategory = ({ url, title, label, closeModal }: TModalS
             <TemplateContentColumn>
                 <header className="m__budget__header">
                     <span className="header__title">{ title }</span>
-                    <FaRegTimesCircle className="modal__budget__icon" onClick={closeModal} />
+                    <FaExclamationTriangle className="modal__budget__icon" />
                 </header>
 
                 <form onSubmit={handleSubmit} className="box__form__store">

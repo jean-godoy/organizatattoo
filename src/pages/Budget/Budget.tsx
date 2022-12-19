@@ -63,7 +63,7 @@ export const Budget = () => {
                     <header className="content__header">
                         <span>Orçamentos</span>
                         <div className="header__right" onClick={handleOpenModal}>
-                            <span>Novo Orçamento.</span>
+                            <span>Novo Orçamento</span>
                             <FaPlus />
                         </div>
                     </header>

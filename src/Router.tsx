@@ -27,7 +27,7 @@ export const Router = () => {
     const { loading, authenticated } = useContext(AuthContext);
 
     const Private = ({ children }: { children: JSX.Element }) => {
-
+        
         if (loading) {
 
             return <Loading />

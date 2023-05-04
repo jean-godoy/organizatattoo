@@ -5,6 +5,7 @@ import { TokenType, TUserData, UserLogged, UserType } from "../../@types";
 import { loginInfo } from "../../services/auth/loginInfoService";
 import loginService from "../../services/auth/loginService";
 import { AuthContext } from "./AuthContext"
+import { checkCredentialService } from "../../services/auth/checkCredentialService";
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
@@ -26,6 +27,15 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         if (recoveredUser) {
             setUser(JSON.parse(recoveredUser));
             setToken(recoveredToken);
+
+            if(token) {
+                const chechAuth = async () => {
+                    console.log("check");
+                    
+                    const response = await checkCredentialService(token);
+                }
+                chechAuth();
+            }
 
             const { email } = JSON.parse(recoveredUser);
             setEmail(email);

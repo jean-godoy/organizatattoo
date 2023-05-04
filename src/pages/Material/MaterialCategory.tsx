@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { ModalGenericCategoryForm } from "../../components/Modal/Material/ModalGenericCategoryForm";
-import { ModalMaterialBrand } from "../../components/Modal/Material/ModalMaterialBrand";
 import { Content } from "../../components/Themes/Content/Content";
 import { Dashboard } from "../../components/Themes/Dashboard/Dashboard";
 import { Main } from "../../components/Themes/Main/Main";
 import { handleGetAllProducts } from "../../services/material/materialService";
+import { ModalMaterialCategory } from "../../components/Modal/Material/ModalMaterialCategory";
 
 export const MaterialCategory = () => {
 
     const [modal, setModal] = useState<boolean>(false);
-    const [modalBrand, setModalBrand] = useState<boolean>(false);
+    const [modalCategory, setModalCategory] = useState<boolean>(false);
     const [products, setProducts] = useState<any>();
     const [data, setdata] = useState<any>({});
  
@@ -33,18 +33,17 @@ export const MaterialCategory = () => {
         setModal(false);
     }
 
-    const handelOpenModalBrand = (data: any) => {
+    const handleOpenMOdalCategory = (data: any) => {
         setdata(data);
-        setModalBrand(true);
-    }
+        setModalCategory(true);
+    } 
 
-    const handelCloseModalBrand = () => {
-        setModalBrand(false);
-    }
+    const handleCloseModalCategory = () => setModalCategory(false);
+
 
     return (
         <Dashboard>
-            { modalBrand ? <ModalMaterialBrand product={data} closeModal={handelCloseModalBrand} /> : <div></div> }
+            { modalCategory ? <ModalMaterialCategory product={data} closeModal={handleCloseModalCategory} /> : <div></div> }
             {modal ? <ModalGenericCategoryForm
                 url="/api/material"
                 title="Novo Produto"
@@ -55,16 +54,16 @@ export const MaterialCategory = () => {
                 <Content>
 
                     <header className="content__header">
-                        <span>Categoria de Materiais</span>
+                        <span>Materiais - Produtos</span>
                         <div className="header__right" onClick={handleModal} >
-                            <span>Adicionar Categoria</span>
+                            <span>Adicionar produto</span>
                             <FaPlus />
                         </div>
                     </header>
 
                     <ul className="g__ul__list">
                         {products?.map((item: any, index: number) => (
-                            <li className="g__list__li" key={index} onClick={() => handelOpenModalBrand(item)} >
+                            <li className="g__list__li" key={index} onClick={() => handleOpenMOdalCategory(item)} >
                                 <span className="g__list__li__name">Produto:</span>
                                 <span className="g__list__li__value">{item.product_name}</span>
                             </li>

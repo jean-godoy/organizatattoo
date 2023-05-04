@@ -15,8 +15,9 @@
     flex-direction: column;
     width: 100%;
     max-width: 960px;
-    min-height: 40vh;
+    height: 80vh;
     background-color: #efefef;
     border-radius: 8px;
     overflow-y: auto;
+    /* overflow-y: scroll; */
 }

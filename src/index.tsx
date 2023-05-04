@@ -7,6 +7,7 @@ import './styles/button.css';
 import './styles/modalDetails.css';
 import './styles/modalDetails.css';
 import './styles/modal.css';
+import './styles/modal-nav.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

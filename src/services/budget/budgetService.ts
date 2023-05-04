@@ -1,5 +1,6 @@
 import { create, all, destroy,  } from '../../hooks/useAPI';
 import API from '../../utils/API';
+import { checkCredentialService } from '../auth/checkCredentialService';
 
 export const registerBudget = async (data: any) => {
     try {
@@ -18,6 +19,7 @@ export const registerBudget = async (data: any) => {
 export const showBudgets = async () => {
     try {
         const response = await all('/api/budget');
+
         return response?.data;
     } catch (error) {
         console.log("ERROR SHOW BUDGETS ", error);

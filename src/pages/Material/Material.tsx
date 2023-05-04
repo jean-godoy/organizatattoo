@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FaPlus, FaUser } from 'react-icons/fa';
-import { ModalMaterial } from '../../components/Modal/Material/ModalMaterial';
+import { ModalMaterialProductDetailsStore } from '../../components/Modal/Material/ModalMaterialProductDetailsStore';
 import { Content } from '../../components/Themes/Content/Content';
 import { Dashboard } from '../../components/Themes/Dashboard/Dashboard';
 import { Main } from '../../components/Themes/Main/Main';
@@ -20,7 +20,7 @@ export const Material = () => {
 
     return (
         <Dashboard>
-            {modal ? <ModalMaterial closeModal={handleCloseModal} /> : <div></div>}
+            {modal ? <ModalMaterialProductDetailsStore closeModal={handleCloseModal} /> : <div></div>}
             <Main>
                 <Content>
 

@@ -35,7 +35,6 @@ export const ModalGenericCategoryForm = ({ url, title, label, closeModal }: TMod
             "product_name": category
         }
         const response = await registerModalCategory(url, data);
-        console.log(response);
         
         if(response.is_replicated) {
             toast.warning(`${response.message}`);

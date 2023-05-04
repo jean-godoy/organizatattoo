@@ -16,7 +16,7 @@ interface IModalForm {
 }
 
 type TDataForm = {
-    name:string,
+    name: string,
     body_region: string,
     sessions: string,
     width: string,
@@ -54,12 +54,16 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
         setSubCategory(data);
     }
 
+    const handleStatusBudget = () => {
+
+    }
+
     const handImage = (e: ChangeEvent<HTMLInputElement>) => setImage(e.target?.files?.[0]);
 
     const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const userId = userData.studioUuid
+        const userId = userData.studioUuid;
 
         const formData = new FormData();
 
@@ -247,6 +251,26 @@ export const ModalBudgetForm = ({ closeModal }: IModalForm) => {
                             <input required className="mc-input" type="text" name="note" onChange={handleInput} />
                             <label className="mc-label">Obs..</label>
                         </div>
+                    </div>
+
+                    <div className="g__box__radio">
+                        <fieldset>
+                            <legend>Status do Orçamento</legend>
+                            <div className="box-input-radio">
+                                <div className="box-group-radio">
+                                    <input className="input-radio" onChange={handleStatusBudget} type="radio" id="huey" name="status_budget" value="analysis" />
+                                    <label>Em Análise</label>
+                                </div>
+                                <div className="box-group-radio">
+                                    <input className="input-radio" onChange={handleStatusBudget} type="radio" id="hueys" name="status_budget" value="approved" />
+                                    <label>Aprovado</label>
+                                </div>
+                                <div className="box-group-radio">
+                                    <input className="input-radio" onChange={handleStatusBudget} type="radio" id="huey" name="status_budget" value="refused" />
+                                    <label>Recusado</label>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
 
                     <div className="box-button">

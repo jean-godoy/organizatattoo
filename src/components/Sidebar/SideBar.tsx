@@ -255,11 +255,11 @@ export const SideBar = ({ sidebarOpen, closeSidebar }: PropsSideBar) => {
                     <div className="box-drop inventory">
                         <Link to="/estoque/material-de-procedimentos" className="sidebar-link-drop">
                             <FaClipboardList className="sidebar-link-icon" />
-                            <label>Material</label>
+                            <label>Produtos</label>
                         </Link>
                         <Link to="/estoque/material-categorias" className="sidebar-link-drop">
                             <FaClipboardList className="sidebar-link-icon" />
-                            <label>Categoria de Material</label>
+                            <label>Material</label>
                         </Link>
                         <Link to="/estoque/piercing" className="sidebar-link-drop">
                             <FaSyringe className="sidebar-link-icon" />

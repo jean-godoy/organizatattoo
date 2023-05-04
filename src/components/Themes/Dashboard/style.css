@@ -11,10 +11,13 @@
 }
 
 .main {
+    position: relative;
     grid-area: main;
     overflow-y: auto;
     /* height: 1200px; */
     background: #eaeaea;
+    background-image: url('../../../images/bg-tattoo-2.jpg');
+    object-fit: cover;
 
 }
 
